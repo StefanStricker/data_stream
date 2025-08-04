@@ -7,7 +7,14 @@ producer = KafkaProducer(
     bootstrap_servers="localhost:9092",
     value_serializer=lambda v: json.dumps(v).encode("utf-8"))
 
-df = pd.read_json("synthetic_data.json")
+with open("synthetic_data.json", "r") as f:
+    data = json.load(f)
 
-print(df.head())
+topic_name = "sensor-data"
 
+for entry in data:
+    producer.send(topic_name, value= entry)    
+    print(f"Data sent: {entry}")    
+    time.sleep(1)
+
+producer.flush()    

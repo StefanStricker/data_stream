@@ -1,2 +1,4 @@
 venv
 synthetic_data.json
+mongo
+kafka
