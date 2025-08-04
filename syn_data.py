@@ -21,6 +21,7 @@ cloud_data = np.random.normal(cloud_mean, cloud_std, num_samples)
 wind_data = np.random.normal(wind_mean, wind_std, num_samples)
 percipation_data = np.random.normal(percipation_mean, percipation_std, num_samples)
 
+
 data = pd.DataFrame({
     'temperature': temperature_data,
     'humidity': humidity_data,
