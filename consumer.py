@@ -1,7 +1,13 @@
 from kafka import KafkaConsumer
+from pymongo import MongoClient
 import json
+from datetime import datetime
 
 running = True
+
+client = MongoClient("mongodb://localhost:27017/")
+db = client["sensor_db"]
+collection = db["measurements"]
 
 consumer = KafkaConsumer(
     "sensor-data",
@@ -16,9 +22,15 @@ while running:
     try:
         for message in consumer:
             data = message.value
-            print(f"Recieved: {data}")
+            data["time"] = datetime.now()
+            collection.insert_one(data)
+            print(f"Data recieved and stored: {data}")
             consumer.commit_async()
 
     except Exception as e:
         print(f"Error: {str(e)}")            
+
+    finally:
+        consumer.close()
+        client.close()    
 
