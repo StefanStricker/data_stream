@@ -20,7 +20,6 @@ services:
         - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
         - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
         - ALLOW_PLAINTEXT_LISTENER=yes
-
         volumes:
         - kafka_data:/bitnami/kafka
         restart: on-failure
@@ -31,10 +30,10 @@ services:
             - "27017:27017"        
         volumes: 
         - ./mongo:/data/db
+        restart: on-failure
 
     generator:
-        build:
-            context: ./data_generator    
+        build: ./data_generator    
         restart: on-failure  
         depends_on:
             - kafka  
@@ -62,6 +61,46 @@ services:
         - mongodb
         restart: on-failure
 
+    prometheus:
+        image: prom/prometheus:latest
+        container_name: prometheus
+        ports:
+            - "9090:9090"        
+        volumes:    
+            - prometheus-data:/prometheus
+            - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+        restart: on-failure    
+
+    grafana:
+        image: grafana/grafana:latest          
+        container_name: grafana
+        ports:
+            - "3000:3000"      
+        volumes:
+            - grafana-data:/grafana
+        restart: on-failure
+
+    kafka-exporter:
+        image: danielqsj/kafka-exporter:latest
+        container_name: kafka-exporter
+        environment:
+        - KAFKA_BROKERS=kafka:9092
+        depends_on:
+        - kafka
+        restart: on-failure
+
+    mongodb-exporter:
+        image: bitnami/mongodb-exporter:latest
+        container_name: mongodb-exporter
+        environment:
+        - MONGODB_URI=mongodb://mongodb:27017
+        depends_on:
+        - mongodb
+        restart: on-failure
+
+
 volumes:
   kafka_data:
   mongo:        
+  prometheus-data:
+  grafana-data:
