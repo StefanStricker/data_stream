@@ -1,7 +1,5 @@
 import numpy as np
 from datetime import datetime
-import json
-import time
 from flask import Flask, jsonify
 
 app = Flask(__name__)

@@ -6,7 +6,6 @@ services:
         container_name: kafka
         ports:
         - "9092:9092"
-        - "9093:9093"
 
         environment:
         - KAFKA_ENABLE_KRAFT=yes
@@ -19,12 +18,12 @@ services:
         - KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER
         - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
         - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-        - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+        - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
         - ALLOW_PLAINTEXT_LISTENER=yes
 
         volumes:
         - kafka_data:/bitnami/kafka
-
+        restart: on-failure
 
     mongodb:
         image: mongo
@@ -36,12 +35,33 @@ services:
     generator:
         build:
             context: ./data_generator    
-        ports:
-            - "5000:5000"
         restart: on-failure  
         depends_on:
             - kafka  
             
+
+    producer:
+        build: ./kafka/producer
+        environment:
+        - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+        - KAFKA_TOPIC=sensor-data
+        depends_on:
+        - kafka
+        - generator
+        restart: on-failure
+
+    consumer:
+        build: ./kafka/consumer
+        environment:
+        - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+        - MONGO_URI=mongodb://mongodb:27017/
+        - KAFKA_TOPIC=sensor-data
+        - KAFKA_GROUP_ID=mongo-writer-group
+        depends_on:
+        - kafka
+        - mongodb
+        restart: on-failure
+
 volumes:
   kafka_data:
   mongo:        
