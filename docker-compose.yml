@@ -38,7 +38,6 @@ services:
         depends_on:
             - kafka  
             
-
     producer:
         build: ./kafka/producer
         environment:
@@ -80,6 +79,8 @@ services:
             - grafana-data:/grafana
         restart: on-failure
 
+
+#Prometheus exporters
     kafka-exporter:
         image: danielqsj/kafka-exporter:latest
         container_name: kafka-exporter
