@@ -18,7 +18,7 @@ percipation_mean = 5
 percipation_std = 2
 
 #Prometheus metrics
-EN_TOTAL      = Counter("generator_events_total", "Total generated sensor events")
+GEN_TOTAL      = Counter("generator_events_total", "Total generated sensor events")
 GEN_ERRORS     = Counter("generator_errors_total", "Total errors during generation")
 GEN_LATENCY    = Histogram("generator_latency_seconds", "Generation function latency (seconds)")
 
