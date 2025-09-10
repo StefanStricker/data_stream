@@ -28,7 +28,7 @@ while running:
     try:
         for message in consumer:
             data = message.value
-            data["timestamp"] = datetime.now(timezone.utc)
+            data["timestamp"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
             collection.insert_one(data)
             print(f"Data recieved and stored: {data}")
             consumer.commit_async()

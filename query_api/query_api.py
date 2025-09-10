@@ -25,8 +25,11 @@ def get_sensors():
 
     data = []
     for d in docs:
+
+        iso_time = d["timestamp"].isoformat()
+        
         data.append({
-            "time": d["timestamp"],   
+            "time": iso_time,   
             "temperature": d["temperature_data"],
             "humidity": d["humidity_data"],
             "cloud": d["cloud_data"],
