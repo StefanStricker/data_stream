@@ -8,9 +8,9 @@ datasources:
     isDefault: true
 
   - name: Infinity
+    uid: Infinity
     type: yesoreyeram-infinity-datasource
     access: proxy
+    url: http://query_api:5001 
     jsonData:
-      allowed_hosts:
-        - "https://jsonplaceholder.typicode.com"
-        - "http://localhost"
+      authentication_method: none
