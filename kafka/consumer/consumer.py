@@ -1,7 +1,8 @@
 from kafka import KafkaConsumer
-from pymongo import MongoClient
+from pymongo import MongoClient, errors as mongo_errors
 import json
 import os
+import time
 from datetime import datetime, timezone
 
 KAFKA_BOOTSTRAP = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "kafka1:9092,kafka2:9094,kafka3:9096")
@@ -29,9 +30,22 @@ while running:
         for message in consumer:
             data = message.value
             data["timestamp"] = datetime.now(timezone.utc)
-            collection.insert_one(data)
-            print(f"Data recieved and stored: {data}")
-            consumer.commit_async()
+            success = False
+
+            for attempt in range (1, 5):
+                try:               
+                    collection.insert_one(data)
+                    print(f"Data recieved and stored: {data}")
+                    success = True
+                    break
+                except mongo_errors.PyMongoError as e:
+                    print(f"Mongo insert failed (attempt {attempt}): {e}")
+                    time.sleep(2)
+
+            if success:
+                consumer.commit_async()
+            else:
+                print(f"Message commit failed. Data: {data}")    
 
     except Exception as e:
         print(f"Error: {str(e)}")            
