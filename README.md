@@ -1,8 +1,8 @@
 # Data stream processing pipeline
 
 ### Prerequisites:
-Docker <br />
-Docker Compose
+Docker https://docs.docker.com/get-started/get-docker/ <br />
+Docker Compose https://docs.docker.com/compose/install/
 
 ### Installation Guide:
 
