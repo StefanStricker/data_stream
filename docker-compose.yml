@@ -167,7 +167,7 @@ services:
             - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource      
         volumes:
             - grafana-data:/var/lib/grafana
-            - ./grafana/provisioning:/etc/grafana/provisioning/dashboards 
+            - ./grafana/provisioning:/etc/grafana/provisioning 
             - ./grafana/dashboards:/var/lib/grafana/dashboards    
         restart: on-failure
 
