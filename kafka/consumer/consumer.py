@@ -4,7 +4,7 @@ import json
 import os
 from datetime import datetime, timezone
 
-KAFKA_BOOTSTRAP = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "kafka:9092")
+KAFKA_BOOTSTRAP = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "kafka1:9092,kafka2:9094,kafka3:9096")
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://mongodb:27017/")
 TOPIC = os.getenv("KAFKA_TOPIC", "sensor-data")
 GROUP_ID = os.getenv("KAFKA_GROUP_ID", "mongo-writer-group")
