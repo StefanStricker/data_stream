@@ -111,6 +111,8 @@ services:
 
     generator:
         build: ./data_generator    
+        ports:
+            - "5000:5000"
         restart: on-failure  
         depends_on:
             - kafka1 
