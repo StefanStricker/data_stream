@@ -58,8 +58,8 @@ bash resilience_test.sh
 
 ### Project Structure:
 
-<pre> 
-.
+ 
+<pre>.
 ├── data_generation/        
 │   └── data_generation.py
 ├── kafka/
@@ -75,6 +75,4 @@ bash resilience_test.sh
 ├── docker-compose.yml
 ├── .env.example
 ├── resilience_test.sh     
-└── README.md
-<pre> 
-
+└── README.md <pre>
