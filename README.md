@@ -14,8 +14,7 @@ A continuous flow of synthetic sensor readings is generated, published to Kafka,
 6. **Prometheus** collects metrics from data_generator, Kafka, and MongoDB <br />
 7. **Grafana** visualizes sensor data via the Infinity plugin and System Health metrics via Prometheus <br />
 
-
-
+<img width="921" height="311" alt="architecture" src="https://github.com/user-attachments/assets/ae5f6d54-e8a7-4e46-a7e9-6fbaa4eabd2e" />
 
 
 ### Prerequisites:
@@ -47,6 +46,8 @@ Docker Compose https://docs.docker.com/compose/install/
 Grafana is available at: http://localhost:3000 <br />
 Login is possible with username: admin; password: admin <br />
 Preconfigured Dashboard is available under Dashboards -> Sensor_data <br />
+
+<img width="1580" height="733" alt="Dashboard" src="https://github.com/user-attachments/assets/049f3375-a643-41cf-b176-5cf1e9fa1518" />
 
 ### Failure recovery Test:
 
