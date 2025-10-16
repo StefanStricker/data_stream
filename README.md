@@ -6,13 +6,13 @@ A continuous flow of synthetic sensor readings is generated, published to Kafka,
 
 ## Docker Architecture Overview:
 
-**Data_generator** generates syntehtic wheather sensor data (temperature, humidity, cloud, wind, percipation) and exposes it through a Flask api. <br />
-**Kafka Producer** reads generated data and publishes to a Kafka topic <br />
-**Kafka Cluster (3 brokers)** replicates data across 3 Brokers in KRaft Mode (Replication Factor 3, in-sync Replicas 2) <br />
-**Kafka Consumer** subscribes to the topic and writes data to MongoDB <br />
-**Query_api** is the REST API for Grafana to query MongoDB via the Infinity Plugin <br />
-**Prometheus** collects metrics from data_generator, Kafka, and MongoDB <br />
-**Grafana** visualizes sensor data via the Infinity plugin and System Health metrics via Prometheus <br />
+1. **Data_generator** generates syntehtic wheather sensor data (temperature, humidity, cloud, wind, percipation) and exposes it through a Flask api. <br />
+2. **Kafka Producer** reads generated data and publishes to a Kafka topic <br />
+3. **Kafka Cluster (3 brokers)** replicates data across 3 Brokers in KRaft Mode (Replication Factor 3, in-sync Replicas 2) <br />
+4. **Kafka Consumer** subscribes to the topic and writes data to MongoDB <br />
+5. **Query_api** is the REST API for Grafana to query MongoDB via the Infinity Plugin <br />
+6. **Prometheus** collects metrics from data_generator, Kafka, and MongoDB <br />
+7. **Grafana** visualizes sensor data via the Infinity plugin and System Health metrics via Prometheus <br />
 
 
 
@@ -39,7 +39,7 @@ docker compose up -d --build
 docker ps
 
 5. Tear down environment  <br />
-docker compose down -v (shutdown Docker and remove Volumes)
+docker compose down -v (shutdown Docker and remove Volumes)<br />
 rm -f .env (Removes Preconfigured environment)
 
 ### Access Grafana 
@@ -58,6 +58,7 @@ bash resilience_test.sh
 
 ### Project Structure:
 
+<pre> ```
 .
 ├── data_generation/        
 │   └── data_generation.py
@@ -75,5 +76,5 @@ bash resilience_test.sh
 ├── .env.example
 ├── resilience_test.sh     
 └── README.md
-
+<pre> ```
 
