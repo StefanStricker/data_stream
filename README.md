@@ -58,7 +58,7 @@ bash resilience_test.sh
 
 ### Project Structure:
 
-<pre> ```
+<pre> 
 .
 ├── data_generation/        
 │   └── data_generation.py
@@ -76,5 +76,5 @@ bash resilience_test.sh
 ├── .env.example
 ├── resilience_test.sh     
 └── README.md
-<pre> ```
+<pre> 
 
