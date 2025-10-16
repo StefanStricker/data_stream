@@ -112,7 +112,7 @@ services:
     generator:
         build: ./data_generator    
         ports:
-            - "5000:5000"
+            - "${GENERATOR_PORT:-5000}:5000"
         restart: on-failure  
         depends_on:
             - kafka1 
@@ -122,8 +122,8 @@ services:
     producer:
         build: ./kafka/producer
         environment:
-        - KAFKA_BOOTSTRAP_SERVERS=kafka1:9092,kafka2:9094,kafka3:9096
-        - KAFKA_TOPIC=sensor-data
+        - KAFKA_BOOTSTRAP_SERVERS=${KAFKA_BOOTSTRAP_SERVERS}
+        - KAFKA_TOPIC=${KAFKA_TOPIC}
         depends_on:
             kafka1:
                 condition: service_healthy
@@ -138,10 +138,10 @@ services:
     consumer:
         build: ./kafka/consumer
         environment:
-        - KAFKA_BOOTSTRAP_SERVERS=kafka1:9092,kafka2:9094,kafka3:9096
-        - MONGO_URI=mongodb://mongodb:27017/
-        - KAFKA_TOPIC=sensor-data
-        - KAFKA_GROUP_ID=mongo-writer-group
+        - KAFKA_BOOTSTRAP_SERVERS=${KAFKA_BOOTSTRAP_SERVERS}
+        - MONGO_URI=${MONGO_URI}
+        - KAFKA_TOPIC=${KAFKA_TOPIC}
+        - KAFKA_GROUP_ID=${KAFKA_GROUP_ID}
         depends_on:
             kafka1:
                 condition: service_healthy
@@ -157,7 +157,7 @@ services:
         image: prom/prometheus:latest
         container_name: prometheus
         ports:
-            - "9090:9090"        
+            - "${PROMETHEUS_PORT:-9090}:9090"
         volumes:    
             - prometheus-data:/prometheus
             - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
@@ -167,7 +167,7 @@ services:
         image: grafana/grafana:latest          
         container_name: grafana
         ports:
-            - "3000:3000"
+            - "${GRAFANA_PORT:-3000}:3000"
         environment:
             - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource      
         volumes:
@@ -194,7 +194,7 @@ services:
             kafka3:
                 condition: service_healthy
         ports:
-            - "9308:9308" 
+            - "${KAFKA_EXPORTER_PORT:-9308}:9308"
         restart: on-failure
 
 
