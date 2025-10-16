@@ -25,22 +25,22 @@ Docker Compose https://docs.docker.com/compose/install/
 ### Installation Guide:
 
 1. Clone Repository <br />
-```git clone https://github.com/StefanStricker/data_stream.git
+```git clone https://github.com/StefanStricker/data_stream.git```
 
-    ```cd data_stream
+    ```cd data_stream```
 
 2. Setup Proconfigured environment <br />
-```cp .env.example .env
+```cp .env.example .env```
 
 3. Start Environment <br />
-```docker compose up -d --build
+```docker compose up -d --build```
 
 4. Veryfy running containers <br />
-```docker ps
+```docker ps```
 
 5. Tear down environment  <br />
-```docker compose down -v (shutdown Docker and remove Volumes)<br />
-```rm -f .env (Removes Preconfigured environment)
+```docker compose down -v (shutdown Docker and remove Volumes)```<br />
+```rm -f .env (Removes Preconfigured environment)```
 
 ### Access Grafana 
 
@@ -53,7 +53,7 @@ Preconfigured Dashboard is available under Dashboards -> Sensor_data <br />
 A Failure recovery test is included to evaluate the systems resilience in case of interruptions to a Kafka broker, Kafka Consumer, or MongoDB 
 
 Run the Failure recovery Test <br />
-```bash resilience_test.sh
+```bash resilience_test.sh```
 
 
 ### Project Structure:
@@ -75,4 +75,4 @@ Run the Failure recovery Test <br />
 ├── docker-compose.yml
 ├── .env.example
 ├── resilience_test.sh     
-└── README.md
+└── README.md```
