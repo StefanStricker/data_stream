@@ -1,7 +1,7 @@
 # Data stream processing pipeline
 
-This project simulates a real-world data streaming scenario of wheather-data for a smart-city application. <br />
-A continuous flow of synthetic sensor readings is generated, published to Kafka, processed and vizualized in real time.
+This project simulates a real-world data streaming scenario of whether-data for a smart-city application. <br />
+A continuous flow of synthetic sensor readings is generated, published to Kafka, processed and visualized in real time.
 
 
 ## Docker Architecture Overview:
