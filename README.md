@@ -1,6 +1,6 @@
 # Data stream processing pipeline
 
-This project simulates a real-world data streaming scenario of whether-data for a smart-city application. <br />
+This project simulates a real-world data streaming scenario of weather-data for a smart-city application. <br />
 A continuous flow of synthetic sensor readings is generated, published to Kafka, processed and visualized in real time.
 
 
